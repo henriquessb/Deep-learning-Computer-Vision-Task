@@ -50,7 +50,7 @@ import os
 
 # Training parameters
 batch_size = 32  # orig paper trained all networks with batch_size=128
-epochs = 20
+epochs = 25
 data_augmentation = True
 num_classes = 4
 
@@ -501,7 +501,7 @@ else:
         # value used for fill_mode = "constant"
         cval=0.,
         # randomly flip images
-        horizontal_flip=True,
+        horizontal_flip=False,
         # randomly flip images
         vertical_flip=False,
         # set rescaling factor (applied before any other transformation)
@@ -527,3 +527,12 @@ else:
 scores = model.evaluate(x_test, y_test, verbose=1)
 print('Test loss:', scores[0])
 print('Test accuracy:', scores[1])
+
+# Save model and weights
+save_dir = os.path.join(os.getcwd(), 'saved_models')
+model_name = 'keras_cifar10_resnet_trained_model.h5'
+if not os.path.isdir(save_dir):
+    os.makedirs(save_dir)
+model_path = os.path.join(save_dir, model_name)
+model.save(model_path)
+print('Saved trained model at %s ' % model_path)

@@ -19,11 +19,11 @@ import csv
 
 batch_size = 32
 num_classes = 4
-epochs = 75
+epochs = 50
 data_augmentation = True
 num_predictions = 20
 save_dir = os.path.join(os.getcwd(), 'saved_models')
-model_name = 'keras_cifar10_trained_model.h5'
+model_name = 'keras_cifar10_cnn_trained_model.h5'
 
 # The data, split between train and test sets:
 #(x_train, y_train), (x_test, y_test) = cifar10.load_data()
@@ -180,7 +180,7 @@ else:
         # set mode for filling points outside the input boundaries
         fill_mode='nearest',
         cval=0.,  # value used for fill_mode = "constant"
-        horizontal_flip=True,  # randomly flip images
+        horizontal_flip=False,  # randomly flip images
         vertical_flip=False,  # randomly flip images
         # set rescaling factor (applied before any other transformation)
         rescale=None,
@@ -189,7 +189,8 @@ else:
         # image data format, either "channels_first" or "channels_last"
         data_format=None,
         # fraction of images reserved for validation (strictly between 0 and 1)
-        validation_split=0.0)
+        validation_split=0.0,
+        dtype=np.ubyte)
 
     # Compute quantities required for feature-wise normalization
     # (std, mean, and principal components if ZCA whitening is applied).
