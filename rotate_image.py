@@ -6,8 +6,18 @@ from PIL import Image
 with open('test.preds.csv', 'w') as output_csv_file:
     image_list = os.listdir('test')
     output_csv_file.write('fn,label\n')
-    for aImage in image_list:
-        output_csv_file.write(aImage+',rotated_left\n')
+    y_train = np.load(sys.argv[1])
+    for i, aImage in enumerate(image_list):
+        string_output = aImage
+        if np.argmax(y_train[i]) == 1:
+            string_output += ',rotated_right'
+        elif np.argmax(y_train[i]) == 2:
+            string_output += ',upside_down'
+        elif np.argmax(y_train[i]) == 1:
+            string_output += ',rotated_left'
+        else:
+            string_output += ',upright'
+        output_csv_file.write(string_output+'\n')
 output_csv_file.close()
 
 with open('test.preds.csv') as input_csv_file:
