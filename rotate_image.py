@@ -13,7 +13,7 @@ with open('test.preds.csv', 'w') as output_csv_file:
             string_output += ',rotated_right'
         elif np.argmax(y_train[i]) == 2:
             string_output += ',upside_down'
-        elif np.argmax(y_train[i]) == 1:
+        elif np.argmax(y_train[i]) == 3:
             string_output += ',rotated_left'
         else:
             string_output += ',upright'
